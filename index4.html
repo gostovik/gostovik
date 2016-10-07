@@ -1,0 +1,248 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    
+<meta charset="UTF-8">
+    
+<title>Гостовик</title>
+    
+<script src="js/jquery.min.js">
+</script>
+
+</head>
+
+
+<body bgcolor="#D8D8D8">
+  <style>
+   body {
+    background: url(FON2.png) no-repeat;
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
+   }
+  </style>
+<div style="margin:50px 50px 150px 100px;">
+
+Статья из журнала <a href="index.html"> Назад к списку типов</a><br>
+<br>
+<textarea rows="4" cols="100" placeholder="СОВЕТ 
+
+исправляемое описание (или любые данные) источника можно скопировать в это поле, чтобы упростить заполнение формы и не переключаться между окнами при копировании фрагментов текста." style= margin: 10px;"></textarea>
+ <br> <br>
+Нажмите Новое описание, затем укажите число авторов. Далее заполните поля формы. <br> <br> Сформируйте описание источника кнопкой Обработать. Результат скопируйте в буфер обмена. <br> <br>
+
+
+<form id="list">
+   
+ <div class="row move" style="display: none; margin: 10px;">
+
+
+
+ <div style="margin: 10px;">
+
+Статья с 
+<input type="radio" name="template" value="1"checked="checked" onclick="document.getElementById('hide2').style.visibility='hidden';document.getElementById('hide3').style.visibility='hidden';" >1
+
+
+        <input type="radio" name="template" value="2" onclick="document.getElementById('hide2').style.visibility='visible';document.getElementById('hide3').style.visibility='hidden';"  >2
+
+        <input type="radio" name="template" value="3" onclick="document.getElementById('hide2').style.visibility='visible';document.getElementById('hide3').style.visibility='visible';">3
+
+        <input type="radio" name="template" value="4" onclick="document.getElementById('hide2').style.visibility='visible';document.getElementById('hide3').style.visibility='visible';">больше 3    автором(ами)
+
+</div>
+
+
+
+<b> Имя и отчество указывается заглавной буквой без точки </b><br>
+
+
+<table>
+    <tr>
+        <td>
+Автор 1<br>   
+        <input type="text" name="surname1[]" placeholder="Фамилия">
+<br>
+        <input type="text" name="firstName1[]" placeholder="Имя"><br>
+        <input type="text" name="lastName1[]" placeholder="Отчество">
+
+<br>
+</td>
+        <td> 
+<span id="hide2" style="visibility:hidden">
+Автор 2<br>       
+        <input type="text" name="surname2[]" placeholder="Фамилия">
+<br>
+        <input type="text" name="firstName2[]" placeholder="Имя">
+<br>
+
+        <input type="text" name="lastName2[]" placeholder="Отчество">
+
+<br>
+
+</span>
+</td>
+        <td>
+<span id="hide3" style="visibility:hidden">
+Автор 3<br>       
+        <input type="text" name="surname3[]" placeholder="Фамилия"><br>
+        <input type="text" name="firstName3[]" placeholder="Имя"><br>
+        <input type="text" name="lastName3[]" placeholder="Отчество">
+<br>
+</span> 
+</td>
+
+    </tr>
+</table>
+<br><br>
+
+
+
+
+        <input type="text" name="NAZVANIE[]" placeholder="Название статьи" size=100>
+<br>
+        <input type="text" name="NAZVANIEJ[]" placeholder="Название журнала" size=100>
+<br>
+        <input type="text" name="NOMER[]" placeholder="Номер журнала"> Только число
+<br>
+        <input type="text" name="GOD[]" placeholder="Год издания">
+<br>
+
+        <input type="text" name="STRANIC[]" placeholder="Промежуток страниц"> Образец: 22-36
+<br>
+
+<br>
+       
+        <input type="button" class="removeRow" value="Удалить всё">
+
+    </div>
+
+</form>
+
+
+
+<div style="margin: 10px;">
+
+    <input type="button" id="addRow" value="Новое описание">
+
+    <input type="button" id="create" value="Обработать">
+
+</div>
+
+
+<br>
+<textarea id="result" rows="6" cols="100" style="display: none; margin: 10px;" readonly>
+</textarea>
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () 
+{
+
+        var row = $(".row").remove().clone(true);
+
+        $("#addRow").click(function ()
+ {
+
+            $(row).clone(true).appendTo("#list").fadeIn().find("input[name='surname1[]']").focus();
+
+        });
+
+        $("#create").click(function ()
+ {
+            //Список полей
+
+            var surname1 = $("input[name='surname1[]']").serializeArray();
+
+            var firstName1 = $("input[name='firstName1[]']").serializeArray();
+
+            var lastName1 = $("input[name='lastName1[]']").serializeArray();
+
+            var surname2 = $("input[name='surname2[]']").serializeArray();
+
+            var firstName2 = $("input[name='firstName2[]']").serializeArray();
+
+            var lastName2 = $("input[name='lastName2[]']").serializeArray();
+
+            var surname3 = $("input[name='surname3[]']").serializeArray();
+            var firstName3 = $("input[name='firstName3[]']").serializeArray();
+            var lastName3 = $("input[name='lastName3[]']").serializeArray();
+
+            var GOD = $("input[name='GOD[]']").serializeArray();
+
+            var NAZVANIE = $("input[name='NAZVANIE[]']").serializeArray();
+
+            var NAZVANIEJ = $("input[name='NAZVANIEJ[]']").serializeArray();
+
+            var NOMER = $("input[name='NOMER[]']").serializeArray();
+
+            var STRANIC = $("input[name='STRANIC[]']").serializeArray();
+
+            var template = $("input[name='template']:checked").val();
+
+            var result = '';
+
+            
+
+//Формирование текста по типу шаблона
+
+            $.each(surname1, function (i)
+ {
+
+                switch (template) 
+{
+
+                                       case '1':
+
+                        result += surname1[i].value + ", " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ NAZVANIE[i].value + " / " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ surname1[i].value + " // " + NAZVANIEJ[i].value +  ". – " + GOD[i].value + ". – " + "№ " + NOMER[i].value + ". – "+ " C. " + STRANIC[i].value + "." + "\n";
+                        break;
+
+                                     case '2':
+
+                        result += surname1[i].value + ", " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ NAZVANIE[i].value + " / " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ surname1[i].value +", " + firstName2[i].value.charAt(0) + ". " + lastName2[i].value.charAt(0) + ". "+ surname2[i].value + " // " + NAZVANIEJ[i].value +  ". – " + GOD[i].value + ". – " + "№ " + NOMER[i].value + ". – "+ " C. " + STRANIC[i].value + "." + "\n";
+                        break;
+
+
+                                     case '3':
+
+                        result += surname1[i].value + ", " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ NAZVANIE[i].value + " / " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ surname1[i].value +", " + firstName2[i].value.charAt(0) + ". " + lastName2[i].value.charAt(0) + ". "+ surname2[i].value + ", " + firstName3[i].value.charAt(0) + ". " + lastName3[i].value.charAt(0) + ". "+ surname3[i].value + " // " + NAZVANIEJ[i].value +  ". – " + GOD[i].value + ". – " + "№ " + NOMER[i].value + ". – "+ " C. " + STRANIC[i].value + "." + "\n";
+
+
+                        break;
+
+                                    case '4':
+
+                        result += surname1[i].value + ", " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ NAZVANIE[i].value + " / " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ surname1[i].value +", " + firstName2[i].value.charAt(0) + ". " + lastName2[i].value.charAt(0) + ". "+ surname2[i].value + ", " + firstName3[i].value.charAt(0) + ". " + lastName3[i].value.charAt(0) + ". "+ surname3[i].value + " [и др.]" + " // " + NAZVANIEJ[i].value +  ". – " + GOD[i].value + ". – " + "№ " + NOMER[i].value + ". – "+ " C. " + STRANIC[i].value + "." + "\n";
+                        break;
+
+
+                                       
+                                     
+                }
+
+            });
+
+            $('#result').text(result).fadeIn();
+
+
+        });
+
+        $(document).on('click', '.removeRow', function ()
+ {
+
+            $(this).parent('div').remove();
+
+        });
+
+    });
+
+</script>
+
+</body>
+
+</html>

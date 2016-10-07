@@ -1,0 +1,288 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    
+<meta charset="UTF-8">
+    
+<title>Гостовик</title>
+    
+<script src="js/jquery.min.js">
+</script>
+
+</head>
+
+
+<body bgcolor="#D8D8D8">
+  <style>
+   body {
+    background: url(FON2.png);
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
+   }
+  </style>
+<div style="margin:50px 50px 150px 100px;">
+
+Статья из сборника МордГПИ <a href="index.html"> Назад к списку типов</a><br>
+<br>
+<textarea rows="4" cols="100" placeholder="СОВЕТ 
+
+исправляемое описание (или любые данные) источника можно скопировать в это поле, чтобы упростить заполнение формы и не переключаться между окнами при копировании фрагментов текста." style= margin: 10px;"></textarea>
+ <br> <br>
+
+
+<form id="list">
+<div class="row move" style="display: none; margin: 0px;">
+<div style="margin: 0px;">
+
+
+<hr style="width: 100%; height: 2px; background-color: #008000; border: none">
+
+Число <b>авторов</b> статьи
+
+        <input type="radio" name="template" value="1" checked="checked" onclick="document.getElementById('hide1').style.visibility='visible'; document.getElementById('hide2').style.visibility='hidden';document.getElementById('hide3').style.visibility='hidden';" >1
+
+
+        <input type="radio" name="template" value="2" onclick="document.getElementById('hide1').style.visibility='visible';document.getElementById('hide2').style.visibility='visible';document.getElementById('hide3').style.visibility='hidden';"  > 2
+
+        <input type="radio" name="template" value="3" onclick="document.getElementById('hide1').style.visibility='visible';document.getElementById('hide2').style.visibility='visible';document.getElementById('hide3').style.visibility='visible';"> 3
+
+        <input type="radio" name="template" value="4" onclick="document.getElementById('hide1').style.visibility='visible';document.getElementById('hide2').style.visibility='hidden';document.getElementById('hide3').style.visibility='hidden'; document.getElementById('hide4').style.visibility='visible'; "> 4 и более
+
+</div>
+
+
+
+<b> Имя и отчество указывается заглавной буквой без точки </b><br>
+
+
+<table>
+    <tr>
+        <td>
+<span id="hide1" style="visibility:visible">
+Автор 1<br>
+        <input type="text" id="surname1" name="surname1[]" placeholder="Фамилия"><br>
+        <input type="text" name="firstName1[]" placeholder="Имя"><br>
+        <input type="text" name="lastName1[]" placeholder="Отчество">
+</span>
+<br>
+</td>
+        <td>
+<span id="hide2" style="visibility:hidden">
+Автор 2<br>       
+        <input type="text" name="surname2[]" placeholder="Фамилия"><br>
+        <input type="text" name="firstName2[]" placeholder="Имя"><br>
+        <input type="text" name="lastName2[]" placeholder="Отчество"><br>
+</span>
+</td>
+        <td>
+<span id="hide3" style="visibility:hidden">
+Автор 3<br>
+        <input type="text" name="surname3[]" placeholder="Фамилия"><br>
+        <input type="text" name="firstName3[]" placeholder="Имя"><br>
+        <input type="text" name="lastName3[]" placeholder="Отчество"><br>
+</span>
+</td>
+<td>
+<span id="hide4" style="visibility:hidden">
+Примечание: если авторов, участвовавших в создании статьи, четыре и более, то  в
+сведениях об ответственности  приводят  фамилию только первого автора. Это не ошибка, а правило. Всё нормально.
+</span>
+</td>
+    </tr>
+</table>
+
+<input type="text" id="NAZVANIEst" name="NAZVANIEst[]" placeholder="Название статьи" size=150>
+
+
+
+        <input type="hidden" id="skrSTRANICm" name="skrSTRANICm[]" placeholder="Число страниц">
+
+
+<br>
+
+
+
+
+        <input type="text" id="STRANICm" name="STRANICm[]" placeholder="Интервал страниц"> Образец: 55-61
+
+<br>
+
+
+
+
+
+<input type="button" class="removeRow" value="Удалить всё">
+</div>
+</form>
+
+<hr style="width: 100%; height: 2px; background-color: #008000; border: none">
+
+
+<div style="margin: 0px;">
+    <input type="button" id="addRow" value="Новое описание">
+    <input type="button" id="create" value="Обработать" >
+   | Не знаете всех данных об издании? <input name=kuku type=submit value="Совет" onClick="alert('1. Не оставляйте пустых полей. Впишите туда шаблоны из одного-двух слов, которые позже замените на необходимые данные. Не используйте знаков препинания, они могут внести путаницу. Запомните как должны записываться данные. Это есть в образцах около полей. Например, сведения относящиеся к заглавию начинаются со строчной буквы. 2. После заполнения всех необходимых полей заново нажмите кнопку Обработать. 3. Скопируйте текст в свой документ. 4. Позже найдите в интернете или библиотеке недостающие данные и замените шаблоны информацией. ')">           |  Шаблон не соответствует моему источнику <input name=kuku type=submit value="Совет" onClick="alert('Убедитесь, что вы верно распознали тип описываемого источника. Также стоит понимать, что Гостовик охватывает не всё многообразие библиографических описаний, а только наиболее типичные конструкции. Если шаблон вам не подходит лишь частично, то сформируйте описание из подходящих данных, а затем вручную отредактируйте его в текстовом редакторе, опираясь на требования ГОСТ.')"> |
+
+<br><br>Нажмите Новое описание, заполните поля, следуя указаниям. <br> Сформируйте описание источника кнопкой Обработать. Результат скопируйте в буфер обмена. <br>
+</div>
+<br>
+<textarea id="result" rows="6" cols="100" style="display: none; margin: 0px;" readonly>
+</textarea>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () 
+{
+
+        var row = $(".row").remove().clone(true);
+
+        $("#addRow").click(function ()
+ {
+
+            $(row).clone(true).appendTo("#list").fadeIn().find("input[name='surname01[]']").focus();
+
+        });
+
+        $("#create").click(function ()
+ {
+            //Список полей
+
+            var surname1 = $("input[name='surname1[]']").serializeArray();
+            var firstName1 = $("input[name='firstName1[]']").serializeArray();
+            var lastName1 = $("input[name='lastName1[]']").serializeArray();
+            var surname2 = $("input[name='surname2[]']").serializeArray();
+            var firstName2 = $("input[name='firstName2[]']").serializeArray();
+            var lastName2 = $("input[name='lastName2[]']").serializeArray();
+            var surname3 = $("input[name='surname3[]']").serializeArray();
+            var firstName3 = $("input[name='firstName3[]']").serializeArray();
+            var lastName3 = $("input[name='lastName3[]']").serializeArray();
+
+            var surname01 = $("input[name='surname01[]']").serializeArray();
+            var firstName01 = $("input[name='firstName01[]']").serializeArray();
+            var lastName01 = $("input[name='lastName01[]']").serializeArray();
+            var surname02 = $("input[name='surname02[]']").serializeArray();
+            var firstName02 = $("input[name='firstName02[]']").serializeArray();
+            var lastName02 = $("input[name='lastName02[]']").serializeArray();
+            var surname03 = $("input[name='surname03[]']").serializeArray();
+            var firstName03 = $("input[name='firstName03[]']").serializeArray();
+            var lastName03 = $("input[name='lastName03[]']").serializeArray();
+
+            var skrsurname01 = $("input[name='skrsurname01[]']").serializeArray();
+            var skrfirstName01 = $("input[name='skrfirstName01[]']").serializeArray();
+            var skrlastName01 = $("input[name='skrlastName01[]']").serializeArray();
+            var skrsurname02 = $("input[name='skrsurname02[]']").serializeArray();
+            var skrfirstName02 = $("input[name='skrfirstName02[]']").serializeArray();
+            var skrlastName02 = $("input[name='skrlastName02[]']").serializeArray();
+            var skrsurname03 = $("input[name='skrsurname03[]']").serializeArray();
+            var skrfirstName03 = $("input[name='skrfirstName03[]']").serializeArray();
+            var skrlastName03 = $("input[name='skrlastName03[]']").serializeArray();
+
+            var tipAVTORA01 = $("input[name='tipAVTORA01[]']").serializeArray();
+            var tipAVTORA02 = $("input[name='tipAVTORA02[]']").serializeArray();
+            var tipAVTORA03 = $("input[name='tipAVTORA03[]']").serializeArray();
+
+            var skrtipAVTORA01 = $("input[name='skrtipAVTORA01[]']").serializeArray();
+            var skrtipAVTORA02 = $("input[name='skrtipAVTORA02[]']").serializeArray();
+            var skrtipAVTORA03 = $("input[name='skrtipAVTORA03[]']").serializeArray()
+
+            var GOD = $("input[name='GOD[]']").serializeArray();
+
+            var NAZVANIE = $("input[name='NAZVANIE[]']").serializeArray();
+            var NAZVANIEst = $("input[name='NAZVANIEst[]']").serializeArray();
+            var tipKNIGI = $("input[name='tipKNIGI[]']").serializeArray();
+
+
+            var TOMOV = $("input[name='TOMOV[]']").serializeArray();
+            var TOM = $("input[name='TOM[]']").serializeArray();
+            var skrTOM = $("input[name='skrTOM[]']").serializeArray();
+            var skrTOMOV = $("input[name='skrTOMOV[]']").serializeArray();
+            var skrNAZVANIETOMA = $("input[name='skrNAZVANIETOMA[]']").serializeArray();
+            var skrSTRANICm = $("input[name='skrSTRANICm[]']").serializeArray();
+            var NAZVANIETOMA = $("input[name='NAZVANIETOMA[]']").serializeArray();
+
+            var REDKPLLEGIA = $("input[name='REDKOLLEGIA[]']").serializeArray();
+
+            var NOMER = $("input[name='NOMER[]']").serializeArray();
+            var skrNOMER = $("input[name='skrNOMER[]']").serializeArray();
+
+
+            var IZDVO = $("input[name='IZDVO[]']").serializeArray();
+            var IZD = $("input[name='IZD[]']").serializeArray();
+            var tipIZD = $("input[name='tipIZD[]']").serializeArray();
+            var skrIZD = $("input[name='skrIZD[]']").serializeArray();
+            var skrtipKNIGI = $("input[name='skrtipKNIGI[]']").serializeArray();
+            var STRANIC = $("input[name='STRANIC[]']").serializeArray();
+            var STRANICm = $("input[name='STRANICm[]']").serializeArray();
+            var GOROD = $("input[name='GOROD[]']").serializeArray();
+
+            var template = $("input[name='template']:checked").val();
+
+            var result = '';
+
+            
+
+//Формирование текста по типу шаблона
+
+            $.each(surname1, function (i)
+ {
+
+                switch (template) 
+{
+
+                                       case '1':
+
+                        result += surname1[i].value + ", " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ NAZVANIEst[i].value + " / " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ surname1[i].value + " // Евсевьевские чтения. Серия: Педагогические науки : сб. науч. ст. по материалам Международ. науч.-практ. конф. с элементами научной школы для молодых ученых – 51-х Евсевьевских чтений, посвященных 70-летию Победы в Великой Отечественной войне (г. Саранск, 14–15 мая 2015 г.) / редкол.: Т. И. Шукшина (председатель), В. И. Лаптун (отв. ред.) [и др.] ; Мордов. гос. пед. ин-т. – Саранск, 2015. – С. " + STRANICm[i].value + "." + "\n";
+                        break;
+
+                                     case '2':
+
+                        result += surname1[i].value + ", " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ NAZVANIEst[i].value + " / " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ surname1[i].value + ", " + firstName2[i].value.charAt(0) + ". " + lastName2[i].value.charAt(0) + ". "+ surname2[i].value + " // Евсевьевские чтения. Серия: Педагогические науки : сб. науч. ст. по материалам Международ. науч.-практ. конф. с элементами научной школы для молодых ученых – 51-х Евсевьевских чтений, посвященных 70-летию Победы в Великой Отечественной войне (г. Саранск, 14–15 мая 2015 г.) / редкол.: Т. И. Шукшина (председатель), В. И. Лаптун (отв. ред.) [и др.] ; Мордов. гос. пед. ин-т. – Саранск, 2015. – С. " + STRANICm[i].value + "." + "\n";
+                                     break;
+
+
+
+                                     case '3':
+
+                        result += surname1[i].value + ", " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ NAZVANIEst[i].value + " / " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ surname1[i].value + ", " + firstName2[i].value.charAt(0) + ". " + lastName2[i].value.charAt(0) + ". "+ surname2[i].value + ", " + firstName3[i].value.charAt(0) + ". " + lastName3[i].value.charAt(0) + ". "+ surname3[i].value + " // Евсевьевские чтения. Серия: Педагогические науки : сб. науч. ст. по материалам Международ. науч.-практ. конф. с элементами научной школы для молодых ученых – 51-х Евсевьевских чтений, посвященных 70-летию Победы в Великой Отечественной войне (г. Саранск, 14–15 мая 2015 г.) / редкол.: Т. И. Шукшина (председатель), В. И. Лаптун (отв. ред.) [и др.] ; Мордов. гос. пед. ин-т. – Саранск, 2015. – С. " + STRANICm[i].value + "." + "\n";
+                                               break;
+
+                                    case '4':
+
+                        result += NAZVANIEst[i].value + " / " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ surname1[i].value + " " + "[и др.]" +  " // Евсевьевские чтения. Серия: Педагогические науки : сб. науч. ст. по материалам Международ. науч.-практ. конф. с элементами научной школы для молодых ученых – 51-х Евсевьевских чтений, посвященных 70-летию Победы в Великой Отечественной войне (г. Саранск, 14–15 мая 2015 г.) / редкол.: Т. И. Шукшина (председатель), В. И. Лаптун (отв. ред.) [и др.] ; Мордов. гос. пед. ин-т. – Саранск, 2015. – С. " + STRANICm[i].value + "." + "\n";
+                        break;
+                                     
+                }
+
+            });
+
+            $('#result').text(result).fadeIn();
+
+
+        });
+
+        $(document).on('click', '.removeRow', function ()
+ {
+
+            $(this).parent('div').remove();
+
+        });
+
+    });
+
+</script>
+
+</body>
+
+</html>

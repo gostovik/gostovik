@@ -1,0 +1,704 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    
+<meta charset="UTF-8">
+    
+<title>Гостовик</title>
+    
+<script src="js/jquery.min.js">
+</script>
+
+</head>
+
+
+<body bgcolor="#D8D8D8">
+  <style>
+   body {
+    background: url(FON2.png);
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
+   }
+  </style>
+<div style="margin:50px 50px 150px 100px;">
+
+Книга <a href="index.html"> Назад к списку типов</a><br>
+<br>
+<textarea rows="4" cols="100" placeholder="СОВЕТ 
+
+исправляемое описание (или любые данные) источника можно скопировать в это поле, чтобы упростить заполнение формы и не переключаться между окнами при копировании фрагментов текста." style= margin: 10px;"></textarea>
+ <br> <br>
+
+
+<form id="list">
+<div class="row move" style="display: none; margin: 0px;">
+<div style="margin: 0px;">
+
+Книги, вышедшие без авторов (переключатель "0") – сборники статей, энциклопедии, словари, справочники, ... . Также помимо авторов у книги может быть коллектив редакторов, переводчиков, авторов-составителей (под ред. А. А. Петрова) Для этого установите флажок "Указать редакторов ..."<br><br>
+
+<hr style="width: 100%; height: 2px; background-color: #008000; border: none">
+
+Число <b>авторов</b> книги
+        <input type="radio" name="template" value="5" onclick="document.getElementById('hide1').style.visibility='hidden'; document.getElementById('hide2').style.visibility='hidden'; document.getElementById('hide3').style.visibility='hidden'; document.getElementById('surname1').value='';" > 0
+
+        <input type="radio" name="template" value="1" checked="checked" onclick="document.getElementById('hide1').style.visibility='visible'; document.getElementById('hide2').style.visibility='hidden';document.getElementById('hide3').style.visibility='hidden';" >1
+
+
+        <input type="radio" name="template" value="2" onclick="document.getElementById('hide1').style.visibility='visible';document.getElementById('hide2').style.visibility='visible';document.getElementById('hide3').style.visibility='hidden';"  > 2
+
+        <input type="radio" name="template" value="3" onclick="document.getElementById('hide1').style.visibility='visible';document.getElementById('hide2').style.visibility='visible';document.getElementById('hide3').style.visibility='visible';"> 3
+
+        <input type="radio" name="template" value="4" onclick="document.getElementById('hide1').style.visibility='visible';document.getElementById('hide2').style.visibility='hidden';document.getElementById('hide3').style.visibility='hidden'; document.getElementById('hide4').style.visibility='visible'; "> 4 и более
+
+</div>
+
+
+
+<b> Имя и отчество указывается заглавной буквой без точки </b><br>
+
+
+<table>
+    <tr>
+        <td>
+<span id="hide1" style="visibility:visible">
+Автор 1<br>
+        <input type="text" id="surname1" name="surname1[]" placeholder="Фамилия"><br>
+        <input type="text" name="firstName1[]" placeholder="Имя"><br>
+        <input type="text" name="lastName1[]" placeholder="Отчество">
+</span>
+<br>
+</td>
+        <td>
+<span id="hide2" style="visibility:hidden">
+Автор 2<br>       
+        <input type="text" name="surname2[]" placeholder="Фамилия"><br>
+        <input type="text" name="firstName2[]" placeholder="Имя"><br>
+        <input type="text" name="lastName2[]" placeholder="Отчество"><br>
+</span>
+</td>
+        <td>
+<span id="hide3" style="visibility:hidden">
+Автор 3<br>
+        <input type="text" name="surname3[]" placeholder="Фамилия"><br>
+        <input type="text" name="firstName3[]" placeholder="Имя"><br>
+        <input type="text" name="lastName3[]" placeholder="Отчество"><br>
+</span>
+</td>
+<td>
+<span id="hide4" style="visibility:hidden">
+Примечание: если авторов, участвовавших в создании книги, четыре и более, то  в
+сведениях об ответственности  приводят  фамилию только первого автора. Это не ошибка, а правило. Всё нормально.
+</span>
+</td>
+    </tr>
+</table>
+
+
+
+<hr style="width: 100%; height: 2px; background-color: #808080; border: none">
+
+
+
+<br>
+
+        <input type="checkbox"  onclick="if(this.checked){document.getElementById('nAVTORY').style.display='inline-block'}else {document.getElementById('nAVTORY').style.display='none'; document.getElementById('surname01').value=''; document.getElementById('surname02').value=''; document.getElementById('surname03').value='';document.getElementById('firstName01').value='';document.getElementById('firstName02').value='';document.getElementById('firstName03').value='';document.getElementById('lastName01').value='';document.getElementById('lastName02').value='';document.getElementById('lastName03').value='';document.getElementById('tipAVTORA01').value='';document.getElementById('tipAVTORA02').value='';document.getElementById('tipAVTORA03').value=''; }"> Указать редакторов, переводчиков и др.<br>
+
+<span id="nAVTORY" style="display: none">
+<b> Имя и отчество указывается заглавной буквой без точки </b><br>
+<b> ВНИМАНИЕ!</b> Фамилии указывать уже согласованными с типом авторства в падеже! Петров: под ред. Петрова. НО! авт.-сост. Петров<br>
+
+
+<table>
+    <tr>
+<td>
+Поле 1<br>
+        <input type="text" id="tipAVTORA01" name="tipAVTORA01[]" placeholder="Тип авторства">
+        <input type="text" id="surname01" name="surname01[]" placeholder="Фамилия"><br>
+        <input type="text" id="firstName01" name="firstName01[]" placeholder="Имя"><br>
+        <input type="text" id="lastName01" name="lastName01[]" placeholder="Отчество"><br>
+</td>
+<td>
+Поле 2<br>
+        <input type="text" id="tipAVTORA02" name="tipAVTORA02[]" placeholder="Тип авторства">
+        <input type="text" id="surname02" name="surname02[]" placeholder="Фамилия"><br>
+        <input type="text" id="firstName02" name="firstName02[]" placeholder="Имя"><br>
+        <input type="text" id="lastName02" name="lastName02[]" placeholder="Отчество"><br>
+</td>
+<td>
+Поле 3<br>
+        <input type="text" id="tipAVTORA03" name="tipAVTORA03[]" placeholder="Тип авторства">
+        <input type="text" id="surname03" name="surname03[]" placeholder="Фамилия"><br>
+        <input type="text" id="firstName03" name="firstName03[]" placeholder="Имя"><br>
+        <input type="text" id="lastName03" name="lastName03[]" placeholder="Отчество"><br>
+</td>
+<td>
+Поля заполняются по порядку.<br> Нельзя оставлять пустым поле левее уже заполненного (1 и 2 пустые, 3 заполнено).<br> Это ведёт к некорректной работе алгоритма.
+</td>
+</tr>
+</table>
+Использовать общепринятые сокращения. Например: под ред. или авт.-сост. или сост. <br>
+</span><br>
+
+
+
+
+        <input type="hidden" id="skrsurname01" name="skrsurname01[]">
+        <input type="hidden" id="skrsurname02" name="skrsurname02[]">
+        <input type="hidden" id="skrsurname03" name="skrsurname03[]">
+        <input type="hidden" id="skrfirstName01" name="skrfirstName01[]">
+        <input type="hidden" id="skrfirstName02" name="skrfirstName02[]">
+        <input type="hidden" id="skrfirstName03" name="skrfirstName03[]">
+        <input type="hidden" id="skrlastName01" name="skrlastName01[]">
+        <input type="hidden" id="skrlastName02" name="skrlastName02[]">
+        <input type="hidden" id="skrlastName03" name="skrlastName03[]">
+        <input type="hidden" id="skrtipAVTORA01" name="skrtipAVTORA01[]">
+        <input type="hidden" id="skrtipAVTORA02" name="skrtipAVTORA02[]">
+        <input type="hidden" id="skrtipAVTORA03" name="skrtipAVTORA03[]">
+
+        <input type="hidden" id="skrSTRANICm" name="skrSTRANICm[]" placeholder="Число страниц">
+
+
+<hr style="width: 100%; height: 2px; background-color: #808080; border: none">
+
+
+<input type="text" name="NAZVANIE[]" placeholder="Заглавие издания" size=100> <br>
+
+        <input type="hidden" id="skrtipKNIGI" name="skrtipKNIGI[]" >
+        <input type="checkbox"  onclick="if(this.checked){document.getElementById('nKNIGI').style.display='inline-block'}else {document.getElementById('nKNIGI').style.display='none';  document.getElementById('tipKNIGI').value=''; }"> Указать сведения, относящиеся к заглавию. Например: учеб. пособие ИЛИ пособие для учителя <br>
+
+<span id="nKNIGI" style="display: none">
+    <input type="text" id="tipKNIGI" name="tipKNIGI[]" placeholder="Сведения, относящиеся к заглавию" size=100>
+</span>
+
+
+<br>
+
+
+
+
+<input type="checkbox"  onclick="if(this.checked){document.getElementById('n1NOMER').style.display='inline-block'; document.getElementById('n1STRANIC').style.display='none'; }else {document.getElementById('n1NOMER').style.display='none'; document.getElementById('n1STRANIC').style.display='inline-block';  document.getElementById('TOMOV').value=''; }"> Издание многотомное? <br>
+
+ <span id="n1NOMER" style="display: none">
+
+<br>
+        <input type="text" id="TOMOV" name="TOMOV[]" placeholder="Число томов/частей">
+        <input type="hidden" id="skrTOMOV" name="skrTOMOV[]" >
+ Образец: 2 т. ИЛИ 3 ч.<br><br>
+
+ <input type="checkbox"  onclick="if(this.checked){document.getElementById('nNOMER').style.display='inline-block'}else {document.getElementById('nNOMER').style.display='none';  document.getElementById('TOM').value=''; document.getElementById('NAZVANIETOMA').value=''; document.getElementById('STRANIC').value=''; }">
+<label for='NOMER'>Описать конкретный том (часть) издания? Если нет – описывается издание вцелом</label>
+<input type="hidden" id="skrTOM" name="skrTOM[]" >
+
+<input type="hidden" id="skrSTRANICm" name="skrSTRANICm[]" >
+<input type="hidden" id="skrNAZVANIETOMA" name="skrNAZVANIETOMA[]" >
+<br>
+
+ <span id="nNOMER" style="display: none">
+    <input type="text" id="TOM" name="TOM[]" placeholder="Номер тома/части"> Образец: Т. 2 ИЛИ Ч. 3<br>
+    <input type="text" id="NAZVANIETOMA" name="NAZVANIETOMA[]" placeholder="Название тома/части" size=80> Название тома/части (если имеется)<br>
+    <input type="text" id="STRANICm" name="STRANICm[]" placeholder="Число страниц"> Число страниц в томе/части
+
+
+</span><br>
+</span><br>
+
+
+<hr style="width: 100%; height: 2px; background-color: #808080; border: none">
+
+
+        <input type="text" name="GOD[]" placeholder="Год издания">
+<br>
+<input type="text" id="IZDVO" name="IZDVO[]" placeholder="Издательство">
+<button type="button" id="7" onclick="javascript:daivalue2('7');" class="button_style" value="Просвещение" name="Просвещение">Просвещение</button>
+<button type="button" id="8" onclick="javascript:daivalue2('8');"  class="button_style" value="Дрофа" name="Дрофа">Дрофа</button>
+<button type="button" id="11" onclick="javascript:daivalue2('11');"  class="button_style" value="Мнемозина" name="Мнемозина">Мнемозина</button>
+<button type="button" id="10" onclick="javascript:daivalue2('10');"  class="button_style" value="Учитель" name="Учитель">Учитель</button>
+<button type="button" id="12" onclick="javascript:daivalue2('12');"  class="button_style" value="ВАКО" name="ВАКО">ВАКО</button>
+<button type="button" id="13" onclick="javascript:daivalue2('13');"  class="button_style" value="Экзамен" name="Экзамен">Экзамен</button>
+
+<br>
+        <input type="text" id="GOROD" name="GOROD[]" placeholder="Место издания ">
+        <button type="button" id="4" onclick="javascript:daivalue('4');"  class="button_style" value="Саранск" name="Саранск">Саранск</button>
+        Но:
+        <button type="button" id="1" onclick="javascript:daivalue('1');" class="button_style" value="М." name="М.">М.</button>
+        <button type="button" id="2" onclick="javascript:daivalue('2');"  class="button_style" value="СПб." name="Спб.">СПб.</button>
+        <button type="button" id="3" onclick="javascript:daivalue('3');"  class="button_style" value="Л." name="Л.">Л. (Ленинград)</button>
+
+        <button type="button" id="5" onclick="javascript:daivalue('5');"  class="button_style" value="Ростов н/Д" name="Ростов н/Д">Ростов н/Д</button>
+        <button type="button" id="6" onclick="javascript:daivalue('6');"  class="button_style" value="Н. Новгород" name="Н. Новгород">Н. Новгород</button><br>
+
+
+
+<span id="n1STRANIC" style="display: inline-block">
+        <input type="text" id="STRANIC" name="STRANIC[]" placeholder="Число страниц">
+</span>
+<br>
+
+<hr style="width: 100%; height: 2px; background-color: #808080; border: none">
+
+
+<b>Факультативные поля</b>
+<br>
+        <input type="hidden" id="skrIZD" name="skrIZD[]" >
+        <input type="checkbox"  onclick="if(this.checked){document.getElementById('nIZD').style.display='inline-block'}else {document.getElementById('nIZD').style.display='none';  document.getElementById('IZD').value=''; document.getElementById('tipIZD').value=''; }"> Номер и тип переиздания
+
+<span id="nIZD" style="display: none">
+    <input type="text" id="IZD" name="IZD[]" placeholder="Номер переиздания"> Только число<br>
+    <input type="text" id="tipIZD" name="tipIZD[]" placeholder="Тип переиздания"> Например: перераб. и доп. ИЛИ испр.
+</span>
+<br>
+<br>
+        <input type="button" class="removeRow" value="Удалить всё">
+</div>
+</form>
+
+<hr style="width: 100%; height: 2px; background-color: #008000; border: none">
+
+
+<div style="margin: 0px;">
+    <input type="button" id="addRow" value="Новое описание">
+    <input type="button" id="create" value="Обработать" onclick="tTIRE(); tKNIGI(); tAVTORY(); tTOMSTRANIC();">
+   | Не знаете всех данных об издании? <input name=kuku type=submit value="Совет" onClick="alert('1. Не оставляйте пустых полей. Впишите туда шаблоны из одного-двух слов, которые позже замените на необходимые данные. Не используйте знаков препинания, они могут внести путаницу. Запомните как должны записываться данные. Это есть в образцах около полей. Например, сведения относящиеся к заглавию начинаются со строчной буквы. 2. После заполнения всех необходимых полей заново нажмите кнопку Обработать. 3. Скопируйте текст в свой документ. 4. Позже найдите в интернете или библиотеке недостающие данные и замените шаблоны информацией. ')">           |  Шаблон не соответствует моему источнику <input name=kuku type=submit value="Совет" onClick="alert('Убедитесь, что вы верно распознали тип описываемого источника. Также стоит понимать, что Гостовик охватывает не всё многообразие библиографических описаний, а только наиболее типичные конструкции. Если шаблон вам не подходит лишь частично, то сформируйте описание из подходящих данных, а затем вручную отредактируйте его в текстовом редакторе, опираясь на требования ГОСТ.')"> |
+
+<br><br>Нажмите Новое описание, заполните поля, следуя указаниям. <br> Сформируйте описание источника кнопкой Обработать. Результат скопируйте в буфер обмена. <br>
+</div>
+<br>
+<textarea id="result" rows="6" cols="100" style="display: none; margin: 0px;" readonly>
+</textarea>
+
+
+
+
+
+<script>
+//добавляем редакторов, проверяем по типам авторства на одинаковость и переставляем местами, чтобы рядом были одного типа.
+var A01 = '';
+var А02 = '';
+var А03 = '';
+var tA01 = '';
+var tА02 = '';
+var tА03 = '';
+var znakA01 = '';
+var znakА02 = '';
+var znakА00 = '';
+var D = '';
+var D2 = '';
+var P1 = ' ';
+var P2 = ' ';
+var P3 = ' ';
+
+
+
+function tAVTORY () {
+	var A01 = document.getElementById("surname01").value
+    var A02 = document.getElementById("surname02").value
+    var A03 = document.getElementById("surname03").value
+    var tA01 = document.getElementById("tipAVTORA01").value
+    var tA02 = document.getElementById("tipAVTORA02").value
+    var tA03 = document.getElementById("tipAVTORA03").value
+
+    document.getElementById("skrfirstName01").value = ""
+    document.getElementById("skrfirstName02").value = ""
+    document.getElementById("skrfirstName03").value = ""
+    document.getElementById("skrlastName01").value = ""
+    document.getElementById("skrlastName02").value = ""
+    document.getElementById("skrlastName03").value = ""
+    document.getElementById("skrsurname01").value = ""
+    document.getElementById("skrsurname02").value = ""
+    document.getElementById("skrsurname03").value = ""
+    document.getElementById("skrtipAVTORA01").value = ""
+    document.getElementById("skrtipAVTORA02").value = ""
+    document.getElementById("skrtipAVTORA03").value = ""
+
+    if (A01 === "" & A02 === "" & A03 === "") {
+        return
+    }
+
+	if (A01 === "") {
+    	   } else {
+         A01 = document.getElementById("firstName01").value + ". " + document.getElementById("lastName01").value + ". " + A01
+      }
+
+    if (A02 === "") {
+        } else {
+          A02 = document.getElementById("firstName02").value + ". " + document.getElementById("lastName02").value + ". " + A02
+        }
+
+    if (A03 === "") {
+        } else {
+          A03 = document.getElementById("firstName03").value + ". " + document.getElementById("lastName03").value + ". " + A03
+        }
+
+      if (tA01 === tA02 & tA02 === tA03 & tA01 !== "") {
+      znakA01 = ", "
+      znakA02 = ", "
+      znakA00 = "; "
+      tA02 = ""
+      tA03 = ""
+      //alert("1 2 3")
+    } else {
+
+
+    if (tA01 === tA02 & tA01 !== "") {
+       //alert("1 2")
+       znakA01 = ", "
+       znakA02 = " ; "
+       znakA00 = "; "
+       tA02 = ""
+       } else {
+
+
+    if (tA02 === tA03 & tA02 !== "") {
+       alert("2 3")
+       znakA01 = " ; "
+       znakA02 = ", "
+       znakA00 = "; "
+       tA03 = ""
+       } else {
+
+
+    if (tA01 === tA03 & tA01 !== "") {
+        znakA01 = ", "
+        znakA02 = " ; "
+        znakA00 = "; "
+
+        D = A03
+        A03 = A02
+        A02 = D
+
+        tA03 = D2
+        tA03 = tA02
+        tA02 = D2
+        //alert("1 3")
+
+    } else {
+        //alert("никто")
+        znakA01 = " ; "
+        znakA02 = " ; "
+        znakA00 = " ; "
+        }
+    }
+    }
+    }
+    if (A01 === '') {
+        tA01 = ''
+        P1 = ' '
+        znakA01 = ''
+    }
+    if (A02 === '') {
+        tA02 = ''
+        P2 = ' '
+        znakA01 = ''
+        znakA02 = ''
+    }
+    if (A03 === '') {
+        tA03 = ''
+        znakA02 = ''
+        P3 = ' '
+        }
+
+var str = ' ; ' + tA01 + P1 + A01 + znakA01 + tA02 + P2 + A02 + znakA02 + tA03 + P3 + A03
+
+//заменяем двойные пробелы, ибо лень отлавливать в шаблонах их...
+
+str = str.replace(/[ \t]{2,}/g, ' ');
+
+if (A02 === "" & A03 === "") {
+    str = str.slice(0, -1);
+    } else {
+    if (A01 !== "" & A02 !== "" & A03 !== "") {
+    } else {
+    str = str.slice(0, -1);
+    }
+
+}
+
+//нет авторов, убираем точку с запятой перед редакторами
+if (document.getElementById("surname1").value === "") {
+    str = str.slice(3);
+    //alert("str")
+}
+
+
+//str = str.replace( / ; /g, " " );
+document.getElementById("skrtipAVTORA01").value = str
+
+}
+</script>
+
+<script>
+//добавляем номер и тип переиздания, скрытая переменная, две промежуточных
+var x = '';
+var y = '';
+
+function tTIRE () {
+	var x = document.getElementById("IZD").value
+    var y = document.getElementById("tipIZD").value
+    document.getElementById("skrIZD").value = ""
+	if (x === "") {
+	   } else {
+      x = x + "-е изд."
+      if (y === "") {
+           y = " – "
+           x = x + y
+            } else {
+            x = x + ", " + y + " – "
+            }
+      document.getElementById("skrIZD").value = x
+        	}
+}
+</script>
+
+
+<script>
+//добавляем тип книги. скрытая переменная, две промежуточных
+var z = '';
+
+function tKNIGI () {
+	var z = document.getElementById("tipKNIGI").value
+    document.getElementById("skrtipKNIGI").value = ""
+	if (z === "") {
+	   } else {
+      z = " : " + z
+      document.getElementById("skrtipKNIGI").value = z
+              	}
+}
+</script>
+
+
+  <script>
+//добавляем в поле города название кнопкой рядом (удобства ради)
+
+function daivalue (id) {
+var S = document.getElementById(id).value;
+document.getElementById("GOROD").value = S;
+}
+
+</script>
+  <script>
+//добавляем в поле издательство название кнопкой рядом (удобства ради)
+
+function daivalue2 (id) {
+var W = document.getElementById(id).value;
+document.getElementById("IZDVO").value = W;
+}
+
+</script>
+
+
+
+<script>
+//добавляем номер тома и число страниц. скрытая переменная, две промежуточных
+var z = '';
+
+function tTOMSTRANIC () {
+
+    var p = document.getElementById("STRANIC").value
+    var f = document.getElementById("TOMOV").value
+    document.getElementById("skrTOMOV").value = ""
+    var z = document.getElementById("TOM").value
+    document.getElementById("skrTOM").value = ""
+	var y = document.getElementById("STRANICm").value
+    document.getElementById("skrSTRANICm").value = ""
+	var x = document.getElementById("NAZVANIETOMA").value
+    document.getElementById("skrNAZVANIETOMA").value = ""
+
+
+    if (f === "") {
+      document.getElementById("skrSTRANICm").value = " – " + p + " с."
+      document.getElementById("skrTOMOV").value = ""
+      return
+      }
+
+    if (f === "") {
+	   } else {
+       if (z === "") {
+             f = " : в " + f
+       } else {
+            f = " : в " + f + " "
+       }
+    }
+
+
+    if (z === "") {
+	   } else {
+            z = z
+            }
+
+    if (y === "") {
+       } else {
+            y = " – " + y + " с."
+            }
+    if (x === "") {
+       } else {
+            x = " : " + x
+            }
+
+
+
+      document.getElementById("skrTOMOV").value = f
+      document.getElementById("skrTOM").value = z
+      document.getElementById("skrSTRANICm").value = y
+      document.getElementById("skrNAZVANIETOMA").value = x
+
+}
+</script>
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () 
+{
+
+        var row = $(".row").remove().clone(true);
+
+        $("#addRow").click(function ()
+ {
+
+            $(row).clone(true).appendTo("#list").fadeIn().find("input[name='surname01[]']").focus();
+
+        });
+
+        $("#create").click(function ()
+ {
+            //Список полей
+
+            var surname1 = $("input[name='surname1[]']").serializeArray();
+            var firstName1 = $("input[name='firstName1[]']").serializeArray();
+            var lastName1 = $("input[name='lastName1[]']").serializeArray();
+            var surname2 = $("input[name='surname2[]']").serializeArray();
+            var firstName2 = $("input[name='firstName2[]']").serializeArray();
+            var lastName2 = $("input[name='lastName2[]']").serializeArray();
+            var surname3 = $("input[name='surname3[]']").serializeArray();
+            var firstName3 = $("input[name='firstName3[]']").serializeArray();
+            var lastName3 = $("input[name='lastName3[]']").serializeArray();
+
+            var surname01 = $("input[name='surname01[]']").serializeArray();
+            var firstName01 = $("input[name='firstName01[]']").serializeArray();
+            var lastName01 = $("input[name='lastName01[]']").serializeArray();
+            var surname02 = $("input[name='surname02[]']").serializeArray();
+            var firstName02 = $("input[name='firstName02[]']").serializeArray();
+            var lastName02 = $("input[name='lastName02[]']").serializeArray();
+            var surname03 = $("input[name='surname03[]']").serializeArray();
+            var firstName03 = $("input[name='firstName03[]']").serializeArray();
+            var lastName03 = $("input[name='lastName03[]']").serializeArray();
+
+            var skrsurname01 = $("input[name='skrsurname01[]']").serializeArray();
+            var skrfirstName01 = $("input[name='skrfirstName01[]']").serializeArray();
+            var skrlastName01 = $("input[name='skrlastName01[]']").serializeArray();
+            var skrsurname02 = $("input[name='skrsurname02[]']").serializeArray();
+            var skrfirstName02 = $("input[name='skrfirstName02[]']").serializeArray();
+            var skrlastName02 = $("input[name='skrlastName02[]']").serializeArray();
+            var skrsurname03 = $("input[name='skrsurname03[]']").serializeArray();
+            var skrfirstName03 = $("input[name='skrfirstName03[]']").serializeArray();
+            var skrlastName03 = $("input[name='skrlastName03[]']").serializeArray();
+
+            var tipAVTORA01 = $("input[name='tipAVTORA01[]']").serializeArray();
+            var tipAVTORA02 = $("input[name='tipAVTORA02[]']").serializeArray();
+            var tipAVTORA03 = $("input[name='tipAVTORA03[]']").serializeArray();
+
+            var skrtipAVTORA01 = $("input[name='skrtipAVTORA01[]']").serializeArray();
+            var skrtipAVTORA02 = $("input[name='skrtipAVTORA02[]']").serializeArray();
+            var skrtipAVTORA03 = $("input[name='skrtipAVTORA03[]']").serializeArray()
+
+            var GOD = $("input[name='GOD[]']").serializeArray();
+
+            var NAZVANIE = $("input[name='NAZVANIE[]']").serializeArray();
+            var tipKNIGI = $("input[name='tipKNIGI[]']").serializeArray();
+
+
+            var TOMOV = $("input[name='TOMOV[]']").serializeArray();
+            var TOM = $("input[name='TOM[]']").serializeArray();
+            var skrTOM = $("input[name='skrTOM[]']").serializeArray();
+            var skrTOMOV = $("input[name='skrTOMOV[]']").serializeArray();
+            var skrNAZVANIETOMA = $("input[name='skrNAZVANIETOMA[]']").serializeArray();
+            var skrSTRANICm = $("input[name='skrSTRANICm[]']").serializeArray();
+            var NAZVANIETOMA = $("input[name='NAZVANIETOMA[]']").serializeArray();
+
+
+
+            var IZDVO = $("input[name='IZDVO[]']").serializeArray();
+            var IZD = $("input[name='IZD[]']").serializeArray();
+            var tipIZD = $("input[name='tipIZD[]']").serializeArray();
+            var skrIZD = $("input[name='skrIZD[]']").serializeArray();
+            var skrtipKNIGI = $("input[name='skrtipKNIGI[]']").serializeArray();
+            var STRANIC = $("input[name='STRANIC[]']").serializeArray();
+            var STRANICm = $("input[name='STRANICm[]']").serializeArray();
+            var GOROD = $("input[name='GOROD[]']").serializeArray();
+
+            var template = $("input[name='template']:checked").val();
+
+            var result = '';
+
+            
+
+//Формирование текста по типу шаблона
+
+            $.each(surname1, function (i)
+ {
+
+                switch (template) 
+{
+
+                                       case '1':
+
+                        result += surname1[i].value + ", " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ NAZVANIE[i].value + skrtipKNIGI[i].value + skrTOMOV[i].value + skrTOM[i].value + skrNAZVANIETOMA[i].value +  " / " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ surname1[i].value + skrtipAVTORA01[i].value + ". – " + skrIZD[i].value + GOROD[i].value + " : " + IZDVO[i].value + ", " + GOD[i].value + "." + skrSTRANICm[i].value + "\n";
+                        break;
+
+                                     case '2':
+
+                        result += surname1[i].value + ", " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ NAZVANIE[i].value + skrtipKNIGI[i].value + skrTOMOV[i].value + skrTOM[i].value + skrNAZVANIETOMA[i].value + " / " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ surname1[i].value +", " + firstName2[i].value.charAt(0) + ". " + lastName2[i].value.charAt(0) + ". "+ surname2[i].value + skrtipAVTORA01[i].value + ". – " + skrIZD[i].value + GOROD[i].value + " : " + IZDVO[i].value + ", " + GOD[i].value + "." + skrSTRANICm[i].value + "\n";
+                        break;
+
+
+                                     case '3':
+
+                        result += surname1[i].value + ", " + firstName1[i].value.charAt(0) + ". " + lastName1 [i].value.charAt(0) + ". "+ NAZVANIE[i].value + skrtipKNIGI[i].value + skrTOMOV[i].value + skrTOM[i].value + skrNAZVANIETOMA[i].value + " / " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ surname1[i].value +", " + firstName2[i].value.charAt(0) + ". " + lastName2[i].value.charAt(0) + ". "+ surname2[i].value + ", " + firstName3[i].value.charAt(0) + ". " + lastName3[i].value.charAt(0) + ". "+ surname3[i].value + skrtipAVTORA01[i].value + ". – " + skrIZD[i].value + GOROD[i].value + " : " + IZDVO[i].value + ", " + GOD[i].value + "." + skrSTRANICm[i].value + "\n";
+                        break;
+
+                                    case '4':
+
+                        result += NAZVANIE[i].value + skrtipKNIGI[i].value + skrTOMOV[i].value + skrTOM[i].value + skrNAZVANIETOMA[i].value + " / " + firstName1[i].value.charAt(0) + ". " + lastName1[i].value.charAt(0) + ". "+ surname1[i].value + " " + "[и др.]" + skrtipAVTORA01[i].value + ". – " + skrIZD[i].value + GOROD[i].value + " : " + IZDVO[i].value + ", " + GOD[i].value + "." + skrSTRANICm[i].value + "\n";
+                        break;
+
+                                   case '5':
+
+                        result += NAZVANIE[i].value + skrtipKNIGI[i].value + skrTOMOV[i].value + skrTOM[i].value + skrNAZVANIETOMA[i].value + " / " + skrtipAVTORA01[i].value + ". – " + skrIZD[i].value + GOROD[i].value + " : " + IZDVO[i].value + ", " + GOD[i].value + "." + skrSTRANICm[i].value + "\n";
+                        break;
+
+
+                                       
+                                     
+                }
+
+            });
+
+            $('#result').text(result).fadeIn();
+
+
+        });
+
+        $(document).on('click', '.removeRow', function ()
+ {
+
+            $(this).parent('div').remove();
+
+        });
+
+    });
+
+</script>
+
+</body>
+
+</html>

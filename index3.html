@@ -1,0 +1,234 @@
+﻿<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    
+<meta charset="UTF-8">
+    
+<title>Гостовик</title>
+    
+<script src="js/jquery.min.js">
+</script>
+
+</head>
+
+
+<body bgcolor="#D8D8D8">
+  <style>
+   body {
+    background: url(FON2.png) no-repeat;
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
+   }
+  </style>
+<div style="margin:50px 50px 150px 100px;">
+
+Оформление описания диссертации и автореферата <a href="index.html"> Назад к списку типов</a><br>
+<br>
+<textarea rows="4" cols="100" placeholder="СОВЕТ 
+
+исправляемое описание (или любые данные) источника можно скопировать в это поле, чтобы упростить заполнение формы и не переключаться между окнами при копировании фрагментов текста." style= margin: 10px;"></textarea>
+ 
+
+<br> <br>
+Нажмите Новое описание, затем выберите тип источника. Далее заполните поля формы. <br> <br> Сформируйте описание источника кнопкой Обработать. Результат скопируйте в буфер обмена. <br> <br>
+
+
+
+
+<form id="list">
+   
+ <div class="row move" style="display: none; margin: 0px;">
+
+
+
+ <div style="margin: 0px;">
+
+
+
+Описание на <input type="radio" name="template" value="2" checked="checked" onclick="document.getElementById('hide').style.visibility='hidden';document.getElementById('hide').style.visibility='hidden';" >автореферат
+
+<input type="radio" name="template" value="1" onclick="document.getElementById('hide').style.visibility='visible';document.getElementById('hide').style.visibility='visible';">диссертацию
+
+
+<br><br>
+
+
+
+ <b> ФИО указывается без сокращений </b><br>
+       Автор<br>       
+        <input type="text" name="surname[]" placeholder="Фамилия"> 
+<br>
+        <input type="text" name="firstName[]" placeholder="Имя"> <br>
+        <input type="text" name="lastName[]" placeholder="Отчество">
+
+<br>
+</div>
+
+
+        <input type="text" name="NAZVANIE[]" placeholder="Тема диссертации" size=100>
+<br>
+        <input type="text" name="KANDOC[]" placeholder="Соискание степени кандидата/доктора *** наук" size=50>Записать аналогично примерам: канд. пед. наук ИЛИ д-ра ист. наук
+<br>
+        <input type="text" name="GOD[]" placeholder="Год издания"> Например: 1999
+<br>
+        <input type="text" name="STRANIC[]" placeholder="Число страниц">
+<br>
+        <input type="text" id="GOROD" name="GOROD[]" placeholder="Место издания ">
+
+        <button type="button" id="4" onclick="javascript:daivalue('4');"  class="button_style" value="Саранск" name="Саранск">Саранск</button>
+        Но:
+        <button type="button" id="1" onclick="javascript:daivalue('1');" class="button_style" value="М." name="М.">М.</button>
+        <button type="button" id="2" onclick="javascript:daivalue('2');"  class="button_style" value="СПб." name="Спб.">СПб.</button>
+        <button type="button" id="3" onclick="javascript:daivalue('3');"  class="button_style" value="Л." name="Л.">Л. (Ленинград)</button>
+
+        <button type="button" id="5" onclick="javascript:daivalue('5');"  class="button_style" value="Ростов н/Д" name="Ростов н/Д">Ростов н/Д</button>
+        <button type="button" id="6" onclick="javascript:daivalue('6');"  class="button_style" value="Н. Новгород" name="Н. Новгород">Н. Новгород</button>
+
+
+<br>
+
+
+
+<span id="hide" style="visibility:hidden">
+        <input type="text" name="SPEC[]" placeholder="Код специальности ВАК" > Например: 13.00.01 <br>
+        <input type="text" name="DATAZ[]" placeholder="Дата защиты"> Формат даты: ДД.ММ.ГГ Например: 20.01.99
+<br>
+        <input type="text" name="DATAU[]" placeholder="Дата утверждения"> Формат даты: ДД.ММ.ГГ Например: 20.01.99
+
+</span>
+       
+        <br><input type="button" class="removeRow" value="Удалить всё">
+
+    </div>
+
+</form>
+
+
+
+<div style="margin: 0px;">
+
+    <input type="button" id="addRow" value="Новое описание">
+
+    <input type="button" id="create" value="Обработать">
+
+</div>
+
+
+<br>
+<textarea id="result" rows="6" cols="100" style="display: none; margin: 10px;" readonly>
+</textarea>
+
+
+</div>
+
+<script>
+//добавляем в поле города название кнопкой рядом (удобства ради)
+
+function daivalue (id) {
+var S = document.getElementById(id).value;
+document.getElementById("GOROD").value = S;
+}
+
+</script>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () 
+{
+
+        var row = $(".row").remove().clone(true);
+
+        $("#addRow").click(function ()
+ {
+
+            $(row).clone(true).appendTo("#list").fadeIn().find("input[name='surname[]']").focus();
+
+        });
+
+        $("#create").click(function ()
+ {
+            //Список полей
+
+            var surname = $("input[name='surname[]']").serializeArray();
+
+            var firstName = $("input[name='firstName[]']").serializeArray();
+
+            var lastName = $("input[name='lastName[]']").serializeArray();
+
+            
+            var GOD = $("input[name='GOD[]']").serializeArray();
+
+            var NAZVANIE = $("input[name='NAZVANIE[]']").serializeArray();
+
+            var STRANIC = $("input[name='STRANIC[]']").serializeArray();
+
+            var GOROD = $("input[name='GOROD[]']").serializeArray();
+
+            var KANDOC = $("input[name='KANDOC[]']").serializeArray();
+
+
+
+            var DATAZ = $("input[name='DATAZ[]']").serializeArray();
+
+            var DATAU = $("input[name='DATAU[]']").serializeArray();
+
+            var SPEC = $("input[name='SPEC[]']").serializeArray();
+
+
+
+
+            var template = $("input[name='template']:checked").val();
+
+            var result = '';
+
+            
+
+//Формирование текста по типу шаблона
+
+            $.each(surname, function (i)
+ {
+
+                switch (template) 
+{
+
+                                       case '1':
+
+                        result += surname[i].value + ", " + firstName[i].value.charAt(0) + ". " + lastName[i].value.charAt(0) + ". " + NAZVANIE[i].value + " : дис. ... " + KANDOC[i].value + " : " + SPEC[i].value + " : защищена " + DATAZ[i].value + " : утв. " + DATAU[i].value + " / " + surname[i].value + " " + firstName[i].value + " " + lastName[i].value +  ". – " + GOROD[i].value + ", " + GOD[i].value + ". – " + STRANIC[i].value + " с." + "\n";
+                        break;
+
+                                     case '2':
+
+
+                        result += surname[i].value + ", " + firstName[i].value.charAt(0) + ". " + lastName[i].value.charAt(0) + ". " + NAZVANIE[i].value + " : автореф. дис. ... " + KANDOC[i].value + " / " + surname[i].value + " " + firstName[i].value + " " + lastName[i].value +  ". – " + GOROD[i].value + ", " + GOD[i].value + ". – " + STRANIC[i].value + " с." + "\n";
+                        break;
+
+                                       
+                                     
+                }
+
+            });
+
+            $('#result').text(result).fadeIn();
+
+
+        });
+
+        $(document).on('click', '.removeRow', function ()
+ {
+
+            $(this).parent('div').remove();
+
+        });
+
+    });
+
+</script>
+
+</body>
+
+</html>

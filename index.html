@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Гостовик</title>
+<script src="js/jquery.min.js">
+</script>
+</head>
+<body bgcolor="#D8D8D8">
+  <style>
+   body {
+    background: url(FON.jpg) no-repeat;
+    -moz-background-size: 100%; /* Firefox 3.6+ */
+    -webkit-background-size: 100%; /* Safari 3.1+ и Chrome 4.0+ */
+    -o-background-size: 100%; /* Opera 9.6+ */
+    background-size: 100%; /* Современные браузеры */
+   }
+  </style>
+<div style="margin:100px 100px 150px 100px;">
+<big>
+<center>
+
+<img src="logo.png" width="745" height="269" alt="Гостовик шаблоны для оформления списка литературы">
+
+<script>
+//добавление в избранное
+function addFav() {
+    var isWebkit, isMac;
+    var UA = navigator.userAgent.toLowerCase();
+    var title = document.title;
+    var url = document.location;
+    // Webkit (Chrome, Opera), Mac
+    if ( (isWebkit = (UA.indexOf('webkit') != -1)) || (isMac = (UA.indexOf('mac') != -1)) ){
+        document.getElementById('fav').innerHTML = 'Нажмите "' + (isMac ? 'Command/Cmd' : 'Ctrl') + ' + D" для добавления страницы в закладки';
+        return false;
+    }
+    // IE
+    if (window.external) {
+    window.external.AddFavorite(url, title);
+    return false;
+    }
+}
+</script>
+<br>
+<br>
+<a href="index1.html">Книга</a><br><br>
+Статья из    <a href="index4.html">журнала</a> или <a href="index6.html">сборника</a>
+<br>
+<br>
+<a href="index3.html"> Диссертация, автореферат</a>
+<br><br>
+Статья из сборника МордГПИ<br>
+<a href="index061.html"> 51 Евсевьевские чтения, Серия: Педагогические науки</a>
+<!--<a href="help.html"> <span style="color: #FF0000">Определить</span></a> тип источника<br>
+<!-- <a href="index4.html"> -Статья из газеты</a><br>
+<a href="index4.html"> Переводное издание</a><br>
+<a href="index4.html"> -Электронные источники</a><br>
+<a href="index4.html"> -Изоиздания</a><br>
+<a href="index4.html"> -Нотные издания</a><br>
+<a href="index4.html"> -Законодательные материалы</a><br>-->
+</center>
+</big>
+<br>
+<br>
+<br>
+<center>Примеры использования (GIF-анимация)<br> <a href="test1.gif"> Описываем книгу</a> <a href="test2.gif"> Исправляем описание</a><br><br></center>
+<br>
+<center>
+<a
+id="fav"
+rel="sidebar"
+href="https://goo.gl/1YGbtj"
+onclick="addFav(); return false"
+class="link">Добавить сайт в закладки</a> <br>Постоянная ссылка — https://goo.gl/1YGbtj
+<br>
+<br>
+</center>
+</div>
+</body>
+</html>
